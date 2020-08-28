@@ -17,6 +17,11 @@ namespace DataTables.Server.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
+        private static readonly string[] Summaries2 = new[]
+        {
+            "Sotos","marina","Sotos","marina","Sotos","marina","Sotos","marina","Sotos","marina","Sotos","marina","Sotos","marina","Sotos","marina"
+        };
+
         private readonly ILogger<WeatherForecastController> logger;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
@@ -33,6 +38,19 @@ namespace DataTables.Server.Controllers
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
+            })
+            .ToArray();
+        }
+
+        [HttpGet("Get2")]
+        public IEnumerable<WeatherForecast> Get2()
+        {
+            var rng = new Random();
+            return Enumerable.Range(1, 16).Select(index => new WeatherForecast
+            {
+                Date = DateTime.Now.AddDays(index),
+                TemperatureC = rng.Next(-20, 55),
+                Summary = Summaries2[rng.Next(Summaries.Length)]
             })
             .ToArray();
         }

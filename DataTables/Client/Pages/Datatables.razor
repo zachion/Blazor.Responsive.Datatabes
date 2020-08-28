@@ -5,7 +5,9 @@
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
-
+<button @onclick="buttonClick" class="btn btn-primary">First Call</button>
+<button @onclick="buttonClick2" class="btn btn-primary">Seccond Call</button>
+<button @onclick="buttonClick3" class="btn btn-primary">No rows call</button>
 <body>
     @if (forecasts == null)
     {
@@ -45,4 +47,20 @@
         forecasts = await Http.GetFromJsonAsync<DataTables.Shared.WeatherForecast[]>("WeatherForecast");
         await JSRuntime.InvokeAsync<object>("TestDataTablesAdd", "#example");
     }
+
+    protected async void buttonClick()
+    {
+        forecasts = await Http.GetFromJsonAsync<DataTables.Shared.WeatherForecast[]>("WeatherForecast");
+    }
+
+    protected async void buttonClick2()
+    {
+        forecasts = await Http.GetFromJsonAsync<DataTables.Shared.WeatherForecast[]>("WeatherForecast/get2");
+    }
+
+    protected async void buttonClick3()
+    {
+        forecasts = null;
+    }
+
 }
